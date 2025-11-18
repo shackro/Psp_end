@@ -5,8 +5,9 @@ services:
     env: python
     plan: free
     buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
+      python -m pip install --upgrade pip setuptools wheel
+      pip install --use-pep517 --no-cache-dir -r requirements.txt
+      
     startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: ENVIRONMENT
